@@ -1,0 +1,8 @@
+*.xlsx
+*.iml
+/log
+/logs
+*.ipynb
+*.json
+/.idea
+/.ipynb_checkpoints
