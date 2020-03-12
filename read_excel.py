@@ -3,8 +3,8 @@ import pandas as pd
 import re, json
 
 
-def read_excel(file, header=[0, 0], columns=[0, 0]):
-    df = pd.read_excel(file, encoding='GBK', sep=',', header=[header[0], header[1]])
+def read_excel(file, header=1, columns=[0, 0]):
+    df = pd.read_excel(file, encoding='GBK', sep=',', header=[0, header-1])
     # print(df.iloc[:, columns[0]:columns[1]].head())
     # print(df.columns.values[columns[0]:columns[1]])
 
@@ -36,8 +36,8 @@ def read_excel(file, header=[0, 0], columns=[0, 0]):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 5:
         print("please input the file name, header range (default 0 0 means only use the 0th row as header), "
               "wanted column range (default 0 0 means no column is selected), support negative number")
     else:
-        read_excel(sys.argv[1], [int(sys.argv[2]), int(sys.argv[3])], [int(sys.argv[4]), int(sys.argv[5])])
+        read_excel(sys.argv[1], int(sys.argv[2]), [int(sys.argv[3]), int(sys.argv[4])])
