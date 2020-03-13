@@ -84,7 +84,7 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
     #         headers_to_join_rm_duplicate.append(list(j for j, x in groupby(i)))
     #     print(headers_to_join,'\n',headers_to_join_rm_duplicate,'\n')
 
-    for j in range(header, 5):
+    for j in range(header, sheet_rows):
         new_headers = construct_header(headers)
 
         headers_to_join = []
@@ -101,7 +101,6 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
 
         print(json.dumps(final(json_with_value_list)))
 
-
 #         # 比较蠢
 #         for j in range(header, 5):
 #             s_json = ''
@@ -112,7 +111,7 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
 #             print(s_json,'\n')
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
+    if len(sys.argv) != 3:
         print("please input the file name, header range (default 0 0 means only use the 0th row as header), ")
     else:
         read_excel(sys.argv[1], int(sys.argv[2]))
