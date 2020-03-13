@@ -1,12 +1,18 @@
+import re
 import sys
+
 import pandas as pd
-import re, json
 
 
 def read_excel(file, header=1, columns=[0, 0]):
     df = pd.read_excel(file, encoding='GBK', sep=',', header=[0, header-1])
     # print(df.iloc[:, columns[0]:columns[1]].head())
     # print(df.columns.values[columns[0]:columns[1]])
+    column = df.shape[1]
+
+    #  prevent columns exceed
+    if columns[1] >= column:
+        columns = [columns[0], column]
 
     data = df.iloc[:, columns[0]:columns[1]]
     headers = df.columns.values[columns[0]:columns[1]]

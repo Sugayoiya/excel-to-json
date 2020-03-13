@@ -6,3 +6,5 @@
 *.json
 /.idea
 /.ipynb_checkpoints
+edward.py
+
