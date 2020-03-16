@@ -2,10 +2,9 @@
 requirement:
 ```
 python3
-pandas (actually not needed)
-re
 json
 xlrd
+pandas,re (actually not needed)
 ```
 
 #### usage:
