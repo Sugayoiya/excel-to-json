@@ -42,14 +42,14 @@ def read_excel(file, header=1, columns=[0, 0]):
             f.write(data.loc[index].to_json())
             f.write(',\n') if not index == data.index[-1] else f.write(']')
 
-
-def insert_many(collection, host='localhost', port=27017, file='test.json'):
-    client = pymongo.MongoClient(host, port)
-    db = client.test
-    with open(file) as j:
-        data = json.load(j)
-        # db[collection].insert_many(data)
-        print(data)
+#
+# def insert_many(collection, host='localhost', port=27017, file='test.json'):
+#     client = pymongo.MongoClient(host, port)
+#     db = client.test
+#     with open(file) as j:
+#         data = json.load(j)
+#         # db[collection].insert_many(data)
+#         print(data)
 
 
 if __name__ == "__main__":
@@ -58,4 +58,4 @@ if __name__ == "__main__":
               "wanted column range (default 0 0 means no column is selected), support negative number")
     else:
         read_excel(sys.argv[1], int(sys.argv[2]), [int(sys.argv[3]), int(sys.argv[4])])
-        insert_many(sys.argv[5])
+        # insert_many(sys.argv[5])
