@@ -2,9 +2,10 @@
 requirement:
 ```
 python3
-pandas
+pandas (actually not needed)
 re
 json
+xlrd
 ```
 
 #### usage:
@@ -14,7 +15,7 @@ command line:
 
 **in this command:**
 
-header_numbers = how many rows of header in this excel
+header_numbers = how many rows of header in this excel (default from column 1 - x in excel)
 
 
 if your excel only have one row header,
