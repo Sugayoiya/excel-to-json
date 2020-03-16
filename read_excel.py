@@ -1,11 +1,13 @@
 import re
 import sys
+import pymongo
+import json
 
 import pandas as pd
 
 
 def read_excel(file, header=1, columns=[0, 0]):
-    df = pd.read_excel(file, encoding='GBK', sep=',', header=[0, header-1])
+    df = pd.read_excel(file, encoding='GBK', sep=',', header=[0, header - 1])
     # print(df.iloc[:, columns[0]:columns[1]].head())
     # print(df.columns.values[columns[0]:columns[1]])
     column = df.shape[1]
@@ -41,9 +43,19 @@ def read_excel(file, header=1, columns=[0, 0]):
             f.write(',\n') if not index == data.index[-1] else f.write(']')
 
 
+def insert_many(collection, host='localhost', port=27017, file='test.json'):
+    client = pymongo.MongoClient(host, port)
+    db = client.test
+    with open(file) as j:
+        data = json.load(j)
+        # db[collection].insert_many(data)
+        print(data)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
+    if len(sys.argv) != 6:
         print("please input the file name, header range (default 0 0 means only use the 0th row as header), "
               "wanted column range (default 0 0 means no column is selected), support negative number")
     else:
         read_excel(sys.argv[1], int(sys.argv[2]), [int(sys.argv[3]), int(sys.argv[4])])
+        insert_many(sys.argv[5])

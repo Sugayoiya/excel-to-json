@@ -65,24 +65,28 @@ def final(json_list):
                     parent, current = current, new_list
     return output
 
+def formTree(list,values):
+    tree = {}
+    for index, item in enumerate(list):
+        currTree = tree
+
+        #         print(index, item)
+        for index_, key in enumerate(item):
+            #             print(index_, key)
+            if key not in currTree:
+                if index_ == len(item) - 1 :
+                    currTree[key] = values[index]
+                else:
+                    currTree[key] = {}
+            currTree = currTree[key]
+    return tree
 
 def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
     excel = xlrd.open_workbook(file)
     sheet = excel.sheet_by_index(0)
     sheet_rows, sheet_cols = sheet.nrows, sheet.ncols
-    headers = [[sheet.cell_value(j, i) for i in range(sheet_cols)] for j in range(header)]
+    headers = [[sheet.cell_value(j,i) for i in range(sheet_cols)] for j in range(header)]
     print(sheet_rows, sheet_cols)
-
-    #     new_headers = construct_header(headers)
-
-    #     headers_to_join = []
-    #     for i in range(len(new_headers[0])):
-    #         headers_to_join.append([new_headers[j][i] for j in range(len(new_headers))])
-
-    #     headers_to_join_rm_duplicate = []
-    #     for i in headers_to_join:
-    #         headers_to_join_rm_duplicate.append(list(j for j, x in groupby(i)))
-    #     print(headers_to_join,'\n',headers_to_join_rm_duplicate,'\n')
 
     for j in range(header, sheet_rows):
         new_headers = construct_header(headers)
@@ -94,21 +98,19 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
         headers_to_join_rm_duplicate = []
         for i in headers_to_join:
             headers_to_join_rm_duplicate.append(list(j for j, x in groupby(i)))
-        #         print(headers_to_join,'\n',headers_to_join_rm_duplicate,'\n')
 
-        json_with_value_list = construct_json_with_value(headers_to_join_rm_duplicate, sheet.row_values(j))
-        print(json_with_value_list)
+        #         print('headers_to_join:\n',headers_to_join,'\nheaders_to_join_rm_duplicate:\n',headers_to_join_rm_duplicate,'\n')
 
-        print(json.dumps(final(json_with_value_list)))
+        #         json_with_value_list = construct_json_with_value(headers_to_join_rm_duplicate,sheet.row_values(j))
+        #         print('json_with_value_list:\n',json_with_value_list)
 
-#         # 比较蠢
-#         for j in range(header, 5):
-#             s_json = ''
-#             for i in range(len(headers_to_join)):
-#                 s_json += construct_json_header(headers_to_join[i])
-# #                 print(sheet.cell_value(j,i))
-#                 s_json += '\"' + str(sheet.cell_value(j,i)) + '\"}'
-#             print(s_json,'\n')
+        #         print('json:\n',json.dumps(final(json_with_value_list)[0]))
+
+        json_real = formTree(headers_to_join_rm_duplicate,sheet.row_values(j))
+
+        # print('json_real:\n',json_real)
+
+        print(json.dumps(json_real))
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
