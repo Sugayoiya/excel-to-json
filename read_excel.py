@@ -53,7 +53,7 @@ def read_excel(file, header=1, columns=[0, 0]):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 6:
+    if len(sys.argv) != 5:
         print("please input the file name, header range (default 0 0 means only use the 0th row as header), "
               "wanted column range (default 0 0 means no column is selected), support negative number")
     else:
