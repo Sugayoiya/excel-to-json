@@ -71,9 +71,9 @@ def form_json_tree(headers, values):
     for index, item in enumerate(headers):
         currTree = tree
 
-        #         print(index, item)
+        # print(index, item)
         for index_, key in enumerate(item):
-            #             print(index_, key)
+            # print(index_, key)
             if key not in currTree:
                 if index_ == len(item) - 1:
                     currTree[key] = values[index]
@@ -103,12 +103,12 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
             for i in headers_to_join:
                 headers_to_join_rm_duplicate.append(list(j for j, x in groupby(i)))
 
-            #         print('headers_to_join:\n',headers_to_join,'\nheaders_to_join_rm_duplicate:\n',headers_to_join_rm_duplicate,'\n')
-
-            #         json_with_value_list = construct_json_with_value(headers_to_join_rm_duplicate,sheet.row_values(j))
-            #         print('json_with_value_list:\n',json_with_value_list)
-
-            #         print('json:\n',json.dumps(final(json_with_value_list)[0]))
+            # print('headers_to_join:\n',headers_to_join,'\nheaders_to_join_rm_duplicate:\n',headers_to_join_rm_duplicate,'\n')
+            #
+            # json_with_value_list = construct_json_with_value(headers_to_join_rm_duplicate,sheet.row_values(j))
+            # print('json_with_value_list:\n',json_with_value_list)
+            #
+            # print('json:\n',json.dumps(final(json_with_value_list)[0]))
 
             json_real = form_json_tree(headers_to_join_rm_duplicate, sheet.row_values(j))
 
