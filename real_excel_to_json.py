@@ -90,7 +90,7 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
     headers = [[sheet.cell_value(j, i) for i in range(sheet_cols)] for j in range(header)]
     print(sheet_rows, sheet_cols)
 
-    with open('test.json', 'w+', encoding='GBK') as f:
+    with open('test.json', 'w+') as f:
         f.write('[')
         for j in range(header, sheet_rows):
             new_headers = construct_header(headers)
