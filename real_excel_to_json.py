@@ -114,8 +114,8 @@ def read_excel(file='test.xlsx', header=1, columns=[0, 0]):
 
             # print('json_real:\n',json_real)
 
-            print(json.dumps(json_real))
-            f.write(json.dumps(json_real))
+            print(json.dumps(json_real, ensure_ascii=False))
+            f.write(json.dumps(json_real, ensure_ascii=False))
             f.write(',\n') if not j == (sheet_rows - 1) else f.write(']')
 
 
